@@ -1,0 +1,41 @@
+version: "3"
+services:
+  scheduler:
+    image: wlee0515/dask-notebook
+    ports:
+      - "8786:8786/tcp"
+      - "8787:8787/tcp"
+    command: ["dask-scheduler"]
+    networks: 
+      - dask_net
+
+  workers:
+    image: wlee0515/dask-notebook
+    command: ["dask-worker", "tcp://scheduler:8786"]
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 500M
+      restart_policy:
+        condition: on-failure 
+    networks: 
+      - dask_net
+
+  jupyterLab:
+    image: wlee0515/dask-notebook
+    ports:
+      - "8888:8888/tcp"
+#    command: ["jupyter-notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
+    command: ["jupyter-lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
+    volumes:
+      - ./playground:/home/myuser/playground
+    networks: 
+      - dask_net
+
+
+
+networks:
+    dask_net:
+      driver: overlay
