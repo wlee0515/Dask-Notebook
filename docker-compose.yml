@@ -1,15 +1,19 @@
 version: "3"
 services:
+  #Dask Scheduler
   scheduler:
+    build: .
     image: wlee0515/dask-notebook
     ports:
-      - "8786:8786/tcp"
       - "8787:8787/tcp"
     command: ["dask-scheduler"]
     networks: 
       - dask_net
 
+  #Dask Worker
   workers:
+    depends_on:
+      - scheduler
     image: wlee0515/dask-notebook
     command: ["dask-worker", "tcp://scheduler:8786"]
     deploy:
@@ -23,12 +27,16 @@ services:
     networks: 
       - dask_net
 
-  jupyterLab:
+  #Jupyter Lab
+  JupyterLab:
+    depends_on:
+      - scheduler
     image: wlee0515/dask-notebook
     ports:
       - "8888:8888/tcp"
-#    command: ["jupyter-notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
-    command: ["jupyter-lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
+    environment:
+      - DASK_SCHEDULER_ADDRESS=tcp://scheduler:8786
+    command: ["jupyter-lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root", --NotebookApp.token='', --NotebookApp.password='']
     volumes:
       - ./playground:/home/myuser/playground
     networks: 
