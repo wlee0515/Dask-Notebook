@@ -5,7 +5,7 @@ Once deployed, Jupyter-Lab and Dask-Dashboard will be available from localhost
 
 Jupyter-Lab : http://localhost:8888
 
-Dask-Dashboard : http://localhost:8787/status
+Dask-Dashboard : http://localhost:8787
 
 
 ## To Build Image
