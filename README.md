@@ -1,5 +1,5 @@
 # Dask-Notebook
-A Jupyter Notebook environment with Dask
+A Docker swaem deployment to run Jupyter-Lab in sn environment setup with Dask. The number of Dask Workers is scalable using Docker Swarm's scale replica functionality.
 
 ## To Build Image
 1. Go to repository directory
@@ -16,7 +16,7 @@ docker swarm init
 2. Go to repository directory
 3. Execute the following command
 ```bash
-docker stack deploy --compose-file .\docker-compose.yml <Stack Name>
+docker stack deploy --compose-file .\docker-compose.yml <Deployment Name>
 ```
 #### Example
 ```bash
@@ -26,7 +26,7 @@ docker stack deploy --compose-file .\docker-compose.yml DaskNotebook
 ## To Scale
 1. Execute the following command
 ```bash
-docker scale <Stack Name>_workers=<Number of Desire Workers>
+docker scale <Deployment Name>_workers=<Number of Desire Workers>
  ```
 #### Example
 ```bash
