@@ -30,6 +30,16 @@ docker stack deploy --compose-file .\docker-compose.yml <Deployment Name>
 docker stack deploy --compose-file .\docker-compose.yml DaskNotebook
 ```
 
+## To Stop
+1. Execute the following command
+```bash
+docker stack rm <Deployment Name>
+ ```
+#### Example
+```bash
+docker stack rm DaskNotebook
+```
+ 
 ## To Scale
 1. Execute the following command
 ```bash
@@ -39,3 +49,4 @@ docker scale <Deployment Name>_workers=<Number of Desire Workers>
 ```bash
 docker scale DaskNotebook_workers=4
  ```
+ 
