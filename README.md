@@ -1,6 +1,13 @@
 # Dask-Notebook
 A Docker swaem deployment to run Jupyter-Lab in sn environment setup with Dask. The number of Dask Workers is scalable using Docker Swarm's scale replica functionality.
 
+Once deployed, Jupyter-Lab and Dask-Dashboard will be available from localhost
+
+Jupyter-Lab : http://localhost:8888
+
+Dask-Dashboard : http://localhost:8787/status
+
+
 ## To Build Image
 1. Go to repository directory
 2. Execute the following command
