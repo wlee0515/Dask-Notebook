@@ -50,3 +50,10 @@ docker scale <Deployment Name>_workers=<Number of Desire Workers>
 docker scale DaskNotebook_workers=4
  ```
  
+## To Add More Python Modules
+1. Go to repository directory
+2. Add new Python module to [requirements.txt](./requirements.txt) 
+3. Rebuild Docker Image using the following command 
+```bash
+docker-compose build --no-cache
+ ```
