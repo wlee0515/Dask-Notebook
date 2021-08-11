@@ -16,7 +16,7 @@ The root directory of Jupyter lab is mapped to the folder [playground](./playgro
 docker-compose build
 ```
 
-## To Run
+## To Run Deployment
 1. Enable Docker Swarm with the following command
 ```bash
 docker swarm init
@@ -31,7 +31,7 @@ docker stack deploy --compose-file .\docker-compose.yml <Deployment Name>
 docker stack deploy --compose-file .\docker-compose.yml DaskNotebook
 ```
 
-## To Stop
+## To Stop Deployment
 1. Execute the following command
 ```bash
 docker stack rm <Deployment Name>
@@ -41,7 +41,7 @@ docker stack rm <Deployment Name>
 docker stack rm DaskNotebook
 ```
  
-## To Scale
+## To Scale Deployment
 1. Execute the following command
 ```bash
 docker scale <Deployment Name>_workers=<Number of Desire Workers>
@@ -51,7 +51,7 @@ docker scale <Deployment Name>_workers=<Number of Desire Workers>
 docker scale DaskNotebook_workers=4
  ```
  
-## To Add More Python Modules
+## To Add More Python Modules to Jupyter-Lab
 1. Go to repository directory
 2. Add new Python module to [requirements.txt](./requirements.txt) 
 3. Rebuild Docker Image using the following command 
