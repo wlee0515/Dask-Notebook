@@ -7,6 +7,7 @@ Jupyter-Lab : http://localhost:8888
 
 Dask-Dashboard : http://localhost:8787
 
+The root directory of Jupyter lab is mapped to the folder [playground](./playground). Files saved in Jupyter-Lab will be available in the [playground](./playground) folder. 
 
 ## To Build Image
 1. Go to repository directory
