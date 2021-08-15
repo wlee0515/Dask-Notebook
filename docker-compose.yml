@@ -47,3 +47,4 @@ services:
 networks:
     dask_net:
       driver: overlay
+      attachable: true
