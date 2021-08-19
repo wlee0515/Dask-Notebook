@@ -1,20 +1,28 @@
 # Dask-Notebook
-A Docker swaem deployment to run Jupyter-Lab in sn environment setup with Dask. The number of Dask Workers is scalable using Docker Swarm's scale replica functionality.
+A Deployment to run Jupyter-Lab in an environment setup with Dask. The number of Dask Workers is scalable creating more Worcker containers in the cluster.
 
-Once deployed, Jupyter-Lab and Dask-Dashboard will be available from localhost
-
-Jupyter-Lab : http://localhost:8888
-
-Dask-Dashboard : http://localhost:8787
-
-The root directory of Jupyter lab is mapped to the folder [playground](./playground). Files saved in Jupyter-Lab will be available in the [playground](./playground) folder. 
-
+# Image Creation
 ## To Build Image
 1. Go to repository directory
 2. Execute the following command
 ```bash
 docker-compose build
 ```
+## To Add More Python Modules to Jupyter-Lab
+1. Go to repository directory
+2. Add new Python module to [requirements.txt](./requirements.txt) 
+3. Rebuild Docker Image using the following command 
+```bash
+docker-compose build --no-cache
+ ```
+
+# Docker Swarm Deployment
+Once deployed, Jupyter-Lab and Dask-Dashboard will be available from localhost
+
+Jupyter-Lab : http://localhost:8888
+Dask-Dashboard : http://localhost:8787
+
+The root directory of Jupyter lab is mapped to the folder [playground](./playground). Files saved in Jupyter-Lab will be available in the [playground](./playground) folder. 
 
 ## To Run Deployment
 1. Enable Docker Swarm with the following command
@@ -50,11 +58,29 @@ docker scale <Deployment Name>_workers=<Number of Desire Workers>
 ```bash
 docker scale DaskNotebook_workers=4
  ```
- 
-## To Add More Python Modules to Jupyter-Lab
+
+
+# Kubernetes Deployment
+Once deployed, Jupyter-Lab and Dask-Dashboard will be available from localhost
+
+Jupyter-Lab : http://localhost:30081
+Dask-Dashboard : http://localhost:30081
+
+## To Run Deployment
 1. Go to repository directory
-2. Add new Python module to [requirements.txt](./requirements.txt) 
-3. Rebuild Docker Image using the following command 
+2. Execute the following command
 ```bash
-docker-compose build --no-cache
+kubectl create -f .\kubectl_dask_notebook.yml
+```
+
+## To Stop Deployment
+1. Execute the following command
+```bash
+kubectl delete -f .\kubectl_dask_notebook.yml
+ ```
+ 
+## To Scale Deployment
+1. Execute the following command
+```bash
+ kubectl scale --replicas=3 deployment/dask-notebook-workers
  ```
