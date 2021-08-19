@@ -20,6 +20,7 @@ docker-compose build --no-cache
 Once deployed, Jupyter-Lab and Dask-Dashboard will be available from localhost
 
 Jupyter-Lab : http://localhost:8888
+
 Dask-Dashboard : http://localhost:8787
 
 The root directory of Jupyter lab is mapped to the folder [playground](./playground). Files saved in Jupyter-Lab will be available in the [playground](./playground) folder. 
@@ -64,6 +65,7 @@ docker scale DaskNotebook_workers=4
 Once deployed, Jupyter-Lab and Dask-Dashboard will be available from localhost
 
 Jupyter-Lab : http://localhost:30081
+
 Dask-Dashboard : http://localhost:30081
 
 ## To Run Deployment
