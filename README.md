@@ -1,6 +1,15 @@
 # Dask-Notebook
 A Deployment to run Jupyter-Lab in an environment setup with Dask. The number of Dask Workers is scalable creating more Worcker containers in the cluster.
 
+When working on a Jupyter-Lab notebook, the Dask-scheduler address is available through the environment variable "DASK_SCHEDULER_ADDRESS" a Dask client may be created with the following example:
+
+```python
+import os
+from dask.distributed import Client
+wClient = Client(os.environ["DASK_SCHEDULER_ADDRESS"])
+```
+
+
 # Image Creation
 ## To Build Image
 1. Go to repository directory
