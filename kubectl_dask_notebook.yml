@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dask-notebook
+spec:
+  selector:
+    matchLabels:
+      app: dask-notebook
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dask-notebook
+    spec:
+      containers:
+      - name: scheduler
+        image: wlee0515/dask-notebook:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8787
+        - containerPort: 8786
+        command: ["dask-scheduler"]
+      - name: jupyter-lab
+        image: wlee0515/dask-notebook:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8888
+        command: ["jupyter-lab"]
+        args: ["--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
+        env:
+        - name: DASK_SCHEDULER_ADDRESS
+          value: tcp://localhost:8786
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dask-notebook-workers
+spec:
+  selector:
+    matchLabels:
+      app: dask-notebook-workers
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: dask-notebook-workers
+    spec:
+      containers:
+      - name: worker
+        image: wlee0515/dask-notebook:latest
+        imagePullPolicy: Never
+        command: ["dask-worker"]
+        args: ["tcp://dask-scheduler-service:8786"]
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jupyter-lab-service
+spec:
+  type: NodePort
+  ports:
+  - name: jupyter-lab
+    port: 8888
+    protocol: TCP
+    targetPort: 8888
+    nodePort: 30080
+  - name: dask-dashboard
+    port: 8787
+    protocol: TCP
+    targetPort: 8787
+    nodePort: 30081
+  selector:
+    app: dask-notebook
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dask-scheduler-service
+spec:
+  ports:
+  - name: dask-scheduler
+    port: 8786
+    protocol: TCP
+    targetPort: 8786
+  selector:
+    app: dask-notebook
+    
+    
+    
