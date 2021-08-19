@@ -36,7 +36,7 @@ services:
       - "8888:8888/tcp"
     environment:
       - DASK_SCHEDULER_ADDRESS=tcp://scheduler:8786
-    command: ["jupyter-lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root", --NotebookApp.token='', --NotebookApp.password='']
+    command: ["jupyter-lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
     volumes:
       - ./playground:/home/myuser/playground
     networks: 
@@ -47,4 +47,3 @@ services:
 networks:
     dask_net:
       driver: overlay
-      attachable: true
