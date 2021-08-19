@@ -14,5 +14,5 @@ RUN ["useradd", "-m", "-G", "root", "myuser"]
 USER myuser
 
 WORKDIR /home/myuser/playground
-COPY ./ /home/myuser/playground
+COPY ./playground /home/myuser/playground
 
