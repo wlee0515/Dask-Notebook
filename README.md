@@ -64,7 +64,7 @@ docker scale DaskNotebook_workers=4
 # Kubernetes Deployment
 Once deployed, Jupyter-Lab and Dask-Dashboard will be available from localhost
 
-Jupyter-Lab : http://localhost:30081
+Jupyter-Lab : http://localhost:30080
 
 Dask-Dashboard : http://localhost:30081
 
